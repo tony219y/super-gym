@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to VPS via SSH
         run: |
           ssh -o StrictHostKeyChecking=no root@${{ secrets.VPS_IP }} "
-            cd /path/to/your/project &&
+            cd /var/www/super-gym &&
             git pull origin main &&
             docker-compose down &&
             docker-compose up -d --build
