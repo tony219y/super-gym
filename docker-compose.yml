@@ -1,39 +1,10 @@
-version: "3.8"
-
 services:
   frontend:
     build: ./frontend
-    expose:
-      - "4000"
-    restart: unless-stopped
-    networks:
-      - supergym-network
+    ports:
+      - "4000:4000"
 
   backend:
     build: ./backend
-    expose:
-      - "4001"
-    restart: unless-stopped
-    networks:
-      - supergym-network
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: supergym-nginx
-    restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /etc/letsencrypt/live/supergym.tony219y.com:/etc/nginx/certs:ro
-    depends_on:
-      - frontend
-      - backend
-    networks:
-      - supergym-network
-
-networks:
-  supergym-network:
-    driver: bridge
+      - "4001:4001"
