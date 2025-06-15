@@ -1,25 +1,29 @@
+version: '3.8'
+
 services:
   frontend:
     build: ./frontend
-    container_name: frontend
+    container_name: supergym-frontend
     restart: always
     expose:
       - "80"
 
   backend:
     build: ./backend
-    container_name: backend
+    container_name: supergym-backend
     restart: always
     expose:
       - "3000"
 
   nginx:
     image: nginx:alpine
-    container_name: nginx
+    container_name: supergym-nginx
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - frontend
       - backend
